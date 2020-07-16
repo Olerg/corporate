@@ -6,11 +6,15 @@ abstract class Repository{
 
     protected $model = false;
 
-    public function get($select = '*', $take = false, $pagination = false){
+    public function get($select = '*', $take = false, $pagination = false, $where = false){
 
         $builder = $this->model->select($select);
         if($take){
             $builder->take($take);
+        }
+
+        if($where){
+            $builder->where($where[0], $where[1]);
         }
 
         if ($pagination){
@@ -30,6 +34,11 @@ abstract class Repository{
             }
             return $item;
         });
+        return $result;
+    }
+
+    public function one($alias, $attr = array()){
+        $result = $this->model->where('alias', $alias)->first();
         return $result;
     }
 }
