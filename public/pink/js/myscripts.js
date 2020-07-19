@@ -12,6 +12,7 @@ jQuery(document).ready(function ($) {
             $.ajax({
                 url:$('#commentform').attr('action'),
                 data:data,
+                headers:{'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')},
                 type:'POST',
                 datatype:'JSON',
                 success: function(html) {
