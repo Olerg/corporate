@@ -38,6 +38,10 @@ class SiteController extends Controller
             $rightBar = view(env('THEME').'.rightBar')->with('content_rightBar', $this->contentRightBar)->render();
             $this->vars = Arr::add($this->vars,'rightBar',$rightBar);
         }
+        if($this->contentLeftBar){
+            $leftBar = view(env('THEME').'.leftBar')->with('content_leftBar', $this->contentLeftBar)->render();
+            $this->vars = Arr::add($this->vars,'leftBar',$leftBar);
+        }
         $this->vars = Arr::add($this->vars,'bar',$this->bar);
         $this->vars = Arr::add($this->vars,'keywords',$this->keywords);
         $this->vars = Arr::add($this->vars,'meta_desc',$this->meta_desc);
