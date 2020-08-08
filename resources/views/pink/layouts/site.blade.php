@@ -24,11 +24,15 @@
     <meta charset="UTF-8" />
     <!-- this line will appear only if the website is visited with an iPad -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.2, user-scalable=yes" />
+
+    <meta name="description" content="{{ (isset($meta_desc)) ? $meta_desc : ''}}">
+    <meta name="keywords" content="{{ (isset($keywords)) ? $keywords : ''}}">
+
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ (isset($title))?$title:'Pink'  }}</title>
 
-    <meta name="description" content="{{ (isset($meta_desc))?$meta_desc:'' }}">
-    <meta name="keyworde" content="{{ (isset($keywords))?$keywords:'' }}">
     <!-- [favicon] begin -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" />
     <link rel="icon" type="image/x-icon" href="{{ asset(env('THEME')) }}/images/favicon.ico" />
@@ -78,14 +82,14 @@
     <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/shortcodes.js"></script>
     <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.colorbox-min.js"></script> <!-- nav -->
     <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/jquery.tweetable.js"></script>
-    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/myscripts.js"></script>
 
+    <script type="text/javascript" src="{{ asset(env('THEME')) }}/js/myscripts.js"></script>
 
 </head>
 <!-- END HEAD -->
 
 <!-- START BODY -->
-<body class="no_js responsive {{(Route::currentRouteName() == 'home') || (Route::currentRouteName() == 'portfolios.index') || (Route::currentRouteName() == 'portfolios.show') ? 'page-template-home-php':''}} stretched">
+<body class="no_js responsive {{ (Route::currentRouteName() ==  'home') || (Route::currentRouteName() == 'portfolios.index') || (Route::currentRouteName() == 'portfolios.show') ? 'page-template-home-php' : ''}} stretched">
 
 <!-- START BG SHADOW -->
 <div class="bg-shadow">
@@ -115,8 +119,8 @@
                 <hr />
 
                 <!-- START MAIN NAVIGATION -->
-                @yield('navigation')
-                <!-- END MAIN NAVIGATION -->
+            @yield('navigation')
+            <!-- END MAIN NAVIGATION -->
                 <div id="header-shadow"></div>
                 <div id="menu-shadow"></div>
             </div>
@@ -126,41 +130,43 @@
 
         <!-- START SLIDER -->
 
-            @yield('slider')
+        @yield('slider')
 
-            <div class="wrap_result"></div>
+        <div class="wrap_result"></div>
 
-        @if(Route::currentRouteName() == 'portfolios.index')
-            <!-- START PAGE META -->
-                <div id="page-meta">
-                    <div class="inner group">
-                        <h3>Welcome to my portfolio page</h3>
-                        <h4>... i hope you enjoy my works</h4>
-                    </div>
+
+    @if(Route::currentRouteName() == 'portfolios.index')
+        <!-- START PAGE META -->
+            <div id="page-meta">
+                <div class="inner group">
+                    <h3>Welcome to my portfolio page</h3>
+                    <h4>... i hope you enjoy my works</h4>
                 </div>
-                <!-- END PAGE META -->
-        @endif
+            </div>
+            <!-- END PAGE META -->
+    @endif
 
-        @if(Route::currentRouteName() == 'contacts')
-            <!-- START PAGE META -->
-                <div id="page-meta">
-                    <div class="inner group">
-                        <h3>...Say Hello! :)</h3>
-                        <h4>Get in touch with Pink Rio team</h4>
-                    </div>
+    @if(Route::currentRouteName() == 'contacts')
+        <!-- START PAGE META -->
+            <div id="page-meta">
+                <div class="inner group">
+                    <h3>...Say Hello! :)</h3>
+                    <h4>Get in touch with Pink Rio team</h4>
                 </div>
-                <!-- END PAGE META -->
-        @endif
+            </div>
+            <!-- END PAGE META -->
+    @endif
+
+
     <!-- START PRIMARY -->
-        <!-- START PRIMARY -->
-        <div id="primary" class="sidebar-{{ isset($bar)?$bar:'no' }}">
+        <div id="primary" class="sidebar-{{ isset($bar) ? $bar : 'no'}}">
             <div class="inner group">
                 <!-- START CONTENT -->
-                    @yield('content')
-                <!-- END CONTENT -->
+            @yield('content')
+            <!-- END CONTENT -->
                 <!-- START SIDEBAR -->
-                    @yield('bar')
-                <!-- END SIDEBAR -->
+            @yield('bar')
+            <!-- END SIDEBAR -->
                 <!-- START EXTRA CONTENT -->
                 <!-- END EXTRA CONTENT -->
             </div>
@@ -168,8 +174,10 @@
         <!-- END PRIMARY -->
 
         <!-- START COPYRIGHT -->
-            @yield('footer')
-        <!-- END COPYRIGHT -->
+
+    @yield('footer')
+
+    <!-- END COPYRIGHT -->
     </div>
     <!-- END WRAPPER -->
 </div>

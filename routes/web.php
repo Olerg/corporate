@@ -40,7 +40,8 @@ Route::resource('articles','ArticlesController',[
 Route::get('articles/cat/{cat_alias?}',['uses'=>'ArticlesController@index','as'=>'articlesCat'])->where('cat_alias','[\w-]+');
 Route::resource('comment','CommentController',['only'=>['store']]);
 Route::match(['get','post'],'/contacts',['uses'=>'ContactsController@index','as'=>'contacts']);
-Route::get('login','Auth\LoginController@showLoginForm');
+Auth::routes();
+Route::get('login','Auth\LoginController@showLoginForm')->name('login');
 Route::post('login','Auth\LoginController@login');
-Route::get('logout','Auth\LoginController@logout');
+Route::get('logout','Auth\LoginController@logout')->name('logout');
 

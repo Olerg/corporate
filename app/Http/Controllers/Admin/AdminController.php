@@ -19,8 +19,9 @@ class AdminController extends \Corp\Http\Controllers\Controller
     protected $vars;
 
     public function __construct() {
+        dd(Auth::user());
         $this->user = Auth::user();
-        if(!$this->user) {\
+        if(!$this->user) {
             dd(Auth::user());
             abort(403);
         }

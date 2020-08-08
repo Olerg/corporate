@@ -46,11 +46,11 @@ class LoginController extends Controller
     {
         $view = property_exists($this, 'loginView')
             ? $this->loginView : '';
-
         if (view()->exists($view)) {
             return view($view)->with('title', 'Вход на сайт');
         }
 
         abort(404);
     }
+
 }

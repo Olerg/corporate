@@ -1,17 +1,8 @@
 @extends(env('THEME').'.layouts.site')
-
-
 @section('content')
-
-
-
     <div id="content-home" class="content group">
         <div class="hentry group">
-
-
-
             <form id="contact-form-contact-us" class="contact-form" method="POST" action="{{ url('/login') }}">
-
                 {{ csrf_field() }}
                 <fieldset>
                     <ul>
@@ -27,8 +18,6 @@
 				                                    </span>
                             @endif
                         </li>
-
-
                         <li class="text-field">
                             <label for="password">
                                 <span class="label">Password</span>
@@ -49,8 +38,5 @@
                 </fieldset>
             </form>
         </div>
-
     </div>
-
-
 @endsection
