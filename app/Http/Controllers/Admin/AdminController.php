@@ -8,7 +8,7 @@ use Auth;
 use Arr;
 use Menu;
 
-class AdminController extends \Corp\Http\Controllers\Controller
+class AdminController extends Controller
 {
     protected $p_rep;
     protected $a_rep;
@@ -19,12 +19,13 @@ class AdminController extends \Corp\Http\Controllers\Controller
     protected $vars;
 
     public function __construct() {
-        dd(Auth::user());
-        $this->user = Auth::user();
-        if(!$this->user) {
-            dd(Auth::user());
-            abort(403);
-        }
+       $this->middleware(function($request, $next) {
+            $this->user = Auth::user();
+            if(!$this->user) {
+                abort(403);
+            }
+           return $next($request);
+        });
     }
 
     public function renderOutput() {
@@ -39,15 +40,13 @@ class AdminController extends \Corp\Http\Controllers\Controller
         $this->vars = Arr::add($this->vars,'footer',$footer);
         return view($this->template)->with($this->vars);
     }
-//    public function getMenu() {
-//        return Menu::make('adminMenu', function($menu) {
-//
-//            $menu->add('Статьи',array('route' => 'admin.articles.index'));
-//
-//            $menu->add('Портфолио',  array('route'  => 'admin.articles.index'));
-//            $menu->add('Меню',  array('route'  => 'admin.articles.index'));
-//            $menu->add('Пользователи',  array('route'  => 'admin.articles.index'));
-//            $menu->add('Привилегии',  array('route'  => 'admin.articles.index'));
-//        });
-//    }
+    public function getMenu() {
+        return Menu::make('adminMenu', function($menu) {
+            $menu->add('Статьи', array('route' => 'admin.articles.index'));
+            $menu->add('Портфолио',  array('route'  => 'admin.articles.index'));
+            $menu->add('Меню',  array('route'  => 'admin.articles.index'));
+            $menu->add('Пользователи',  array('route'  => 'admin.articles.index'));
+            $menu->add('Привилегии',  array('route'  => 'admin.articles.index'));
+        });
+    }
 }
