@@ -69,9 +69,14 @@ class ArticlesController extends SiteController
         if($article){
             $article->img = json_decode($article->img);
         }
-        $this->title = $article->title;
+        if(isset($article->id)){
+            $this->title = $article->title;
+            $this->keywords = $article->keywords;
+            $this->meta_desc = $article->meta_desc;
+        }
+        /*$this->title = $article->title;
         $this->keywords = $article->keywords;
-        $this->meta_desc = $article->meta_desc;
+        $this->meta_desc = $article->meta_desc;*/
         $content = view(env('THEME').'.article_content')->with('article', $article)->render();
         $this->vars = Arr::add($this->vars,'content', $content);
         $comments = $this->getComments(config('settings.recent_comments'));
