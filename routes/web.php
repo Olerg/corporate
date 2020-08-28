@@ -48,5 +48,6 @@ Route::get('logout','Auth\LoginController@logout');
 Route::group([ 'as' => 'admin.','prefix'=>'admin','middleware'=>'auth'],function (){
     Route::get('/',['uses'=>'Admin\IndexController@index','as'=>'adminIndex']);
     Route::resource('/articles','Admin\ArticlesController');
+    Route::resource('/permissions','Admin\PermissionsController');
 });
 

@@ -33,4 +33,24 @@ class Role extends Model
     public function perms(){
         return $this->belongsToMany('Corp\Permission','permission_role');
     }
+    public function hasPermission($name, $require = false){
+        if(is_array($name)){
+            foreach ($name as $permissionName) {
+                $hasPermission = $this->hasPermission($permissionName);
+
+                if($hasPermission && !$require){
+                    return true;
+                }elseif (!$hasPermission && $require){
+                    return false;
+                }
+            }
+            return $require;
+        }else{
+            foreach ($this->perms()->get() as $permission){
+                if($permission->name == $name){
+                    return true;
+                }
+            }
+        }
+    }
 }
