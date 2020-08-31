@@ -1,6 +1,7 @@
 <div id="content-page" class="content group">
     <div class="hentry group">
-        {!! Form::open(['url' => (isset($menus->id)) ? route('admin.menus.update',['menus'=>$menu->id]) : route('admin.menus.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+        {!! Form::open(['url' => (isset($menu->id)) ? route('admin.menus.update',['menus'=>$menu->id]) : route('admin.menus.store'),'class'=>'contact-form','method'=>'POST','enctype'=>'multipart/form-data']) !!}
+
         <ul>
             <li class="text-field">
                 <label for="name-contact-us">
@@ -105,18 +106,18 @@
     </div>
 </div>
 <script>
-    jQuery(function ($) {
+    jQuery(function($) {
         $('#accordion').accordion({
-            activate: function (e, obj) {
+            activate: function(e, obj) {
                 obj.newPanel.prev().find('input[type=radio]').attr('checked','checked');
             }
         });
         var active = 0;
-        $('#accordion input[type=radio]').each(function (ind, it) {
-            if($(this).prop('checked')){
+        $('#accordion input[type=radio]').each(function(ind,it) {
+            if($(this).prop('checked')) {
                 active = ind;
             }
         });
-        $('#accordion').accordion('option','active',active);
+        $('#accordion').accordion('option','active', active);
     })
 </script>
