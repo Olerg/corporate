@@ -2,6 +2,7 @@
 
 namespace Corp\Providers;
 
+use Corp\Menu;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -28,6 +29,9 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
         Route::bind('article', function ($value){
             return \Corp\Article::where('alias',$value)->first();
+        });
+        Route::bind('menu',function ($value){
+            return Menu::where('id',$value)->first();
         });
     }
 
